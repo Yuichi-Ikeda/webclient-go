@@ -1,3 +1,4 @@
+package main
 import (
     "fmt"
     "net/http"
@@ -14,18 +15,16 @@ const (
         defaultName = "world"
 )
 
-var msg = "init"
-
 func main() {
     http.HandleFunc("/", handler)
-    http.ListenAndServe(":80", nil)
+    http.ListenAndServe(":8080", nil)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Your url path is %s. \n", r.URL.Path)
 
     // call gRPC service
-    msg = callgrpc()
+    msg := callgrpc()
     fmt.Fprintf(w, "Greeting from gRPC service : %s", msg)
 }
 
